@@ -2850,6 +2850,15 @@ class CheckOptions {
     if (log.event?.type === "url_access") {
       return "ALLOWED";
     }
+    if (log.event?.type === "legitimate_access") {
+      // Check if this is an allowlisted URL or Microsoft domain
+      if (log.event?.reason && 
+          (log.event.reason.includes("allowlist") || 
+           log.event.reason.includes("Microsoft domain"))) {
+        return "BYPASSED";
+      }
+      return "ALLOWED";
+    }
     return "-";
   }
 

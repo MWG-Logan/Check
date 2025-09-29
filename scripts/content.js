@@ -2364,6 +2364,17 @@ if (window.checkExtensionLoaded) {
           `📋 URL matches user allowlist pattern: ${window.location.href}`
         );
 
+        // Store detection result for allowlisted URLs
+        lastDetectionResult = {
+          verdict: "allowlisted",
+          isSuspicious: false,
+          isBlocked: false,
+          threats: [],
+          reason: "URL matches user-configured allowlist pattern",
+          score: 100,
+          threshold: 85,
+        };
+
         // Log as legitimate access for allowlisted URLs (only on first run)
         if (!isRerun) {
           logProtectionEvent({
@@ -2632,6 +2643,17 @@ if (window.checkExtensionLoaded) {
         logger.log(
           "ℹ️ MICROSOFT DOMAIN (NON-LOGIN) - No phishing scan needed, no badge shown"
         );
+
+        // Store detection result for Microsoft domains
+        lastDetectionResult = {
+          verdict: "ms-domain",
+          isSuspicious: false,
+          isBlocked: false,
+          threats: [],
+          reason: "Legitimate Microsoft domain (non-login page)",
+          score: 100,
+          threshold: 85,
+        };
 
         // Log as legitimate Microsoft access (but not login page)
         logProtectionEvent({

@@ -792,8 +792,14 @@ class CheckPopup {
     } else if (analysis.verdict === "not-evaluated") {
       this.showSecurityBadge("neutral", "Not Microsoft Login");
       this.hideThreats();
+    } else if (analysis.verdict === "allowlisted") {
+      this.showSecurityBadge("neutral", "Bypassed");
+      this.hideThreats();
+    } else if (analysis.verdict === "ms-domain") {
+      this.showSecurityBadge("neutral", "Bypassed");
+      this.hideThreats();
     } else {
-      // For general Microsoft domains or other safe sites - show neutral, no badge
+      // For other safe sites - show neutral, no badge
       this.showSecurityBadge("neutral", "No Action Required");
       this.hideThreats();
     }
